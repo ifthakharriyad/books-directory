@@ -1,0 +1,16 @@
+meta {
+  name: Create a book
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{rootUrl}}/book
+  body: formUrlEncoded
+  auth: none
+}
+
+body:form-urlencoded {
+  title: Motherless%20dhaka
+  author: ffff
+}

@@ -1,0 +1,15 @@
+meta {
+  name: Update a book
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{rootUrl}}/book/1
+  body: formUrlEncoded
+  auth: none
+}
+
+body:form-urlencoded {
+  title: Go%20with%20the%20go
+}
