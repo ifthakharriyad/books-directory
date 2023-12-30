@@ -1,5 +1,7 @@
 const express = require("express");
 const bookRouter = require("./routes/book");
+const connectDB = require("./models/connect");
+require("dotenv").config();
 const app = express();
 const port = 3000;
 
@@ -14,7 +16,14 @@ app.get("/api/v1/hello", (req, res) => {
 
 app.use("/api/v1/book", bookRouter);
 
-// Listening to the port
-app.listen(port, () => {
-  console.log(`Server is listening to the port ${port}`);
-});
+(async () => {
+  try {
+    await connectDB();
+    // Listening to the port
+    app.listen(port, () => {
+      console.log(`Server is listening to the port ${port}`);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+})();
