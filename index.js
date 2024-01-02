@@ -7,6 +7,7 @@ const port = 3000;
 
 // Middlewires
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 // API endpoints
 //`GET /api/v1/hello`: Prints "Hello World".

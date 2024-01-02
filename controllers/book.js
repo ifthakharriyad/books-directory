@@ -1,5 +1,5 @@
 const { getAll, getABook } = require("../models/getBooks");
-
+const createABook = require("../models/createBook");
 async function getAllBooks(req, res) {
   try {
     const books = await getAll();
@@ -10,8 +10,18 @@ async function getAllBooks(req, res) {
   }
 }
 
-function createBook(req, res) {
-  res.send(req.body);
+async function createBook(req, res) {
+  try {
+    const err = await createABook(req.body);
+    if (err) {
+      res.status(400).send("Provide (valid) book data!");
+      return;
+    }
+    res.status(201).end();
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Something went wrong! Try again.");
+  }
 }
 
 async function getBook(req, res) {

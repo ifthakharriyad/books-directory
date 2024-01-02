@@ -21,7 +21,7 @@ async function prepareDB() {
   await client.query(`CREATE TABLE books (
     id INT GENERATED ALWAYS AS IDENTITY NOT NULL PRIMARY KEY,
     title VARCHAR(100) NOT NULL,
-    author VARCHAR(100),
+    author VARCHAR(100) NOT NULL,
     edition INT,
     publisher VARCHAR(100),
     publishedat DATE,
