@@ -1,14 +1,32 @@
-function getAllBooks(req, res) {
-  res.send("All the books");
+const { getAll, getABook } = require("../models/getBooks");
+
+async function getAllBooks(req, res) {
+  try {
+    const books = await getAll();
+    res.json(books);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Something went wrong! Try again.");
+  }
 }
 
 function createBook(req, res) {
   res.send(req.body);
 }
 
-function getBook(req, res) {
+async function getBook(req, res) {
   const { id } = req.params;
-  res.send(`Here is the book with id:${id}`);
+  try {
+    const book = await getABook(id);
+    if (!book) {
+      res.status(404).send("The book does not exist!");
+      return;
+    }
+    res.json(book);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Something went wrong! Try again.");
+  }
 }
 
 function updateBook(req, res) {

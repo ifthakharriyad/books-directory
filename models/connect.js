@@ -59,4 +59,4 @@ async function prepareDB() {
     await client.query(queryConfig);
   }
 }
-module.exports = { connectDB, prepareDB };
+module.exports = { connectDB, prepareDB, client };
