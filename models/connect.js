@@ -1,12 +1,15 @@
 const { Client } = require("pg");
 const books = require("../models/sample-books");
+require("dotenv").config();
+
 
 const client = new Client({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
-  password: null,
+  password: process.env.DB_PASS,
   port: process.env.DB_PORT,
 });
+
 
 async function connectDB() {
   await client.connect();
@@ -15,8 +18,8 @@ async function connectDB() {
 
 async function prepareDB() {
   // Creating booksdb if not exists.
-  await client.query("DROP DATABASE IF EXISTS booksdb;");
-  await client.query("CREATE DATABASE booksdb;");
+  await client.query("DROP DATABASE IF EXISTS booksdb");
+  await client.query("CREATE DATABASE booksdb");
   await client.query("DROP TABLE IF EXISTS books");
   await client.query(`CREATE TABLE books (
     id INT GENERATED ALWAYS AS IDENTITY NOT NULL PRIMARY KEY,
