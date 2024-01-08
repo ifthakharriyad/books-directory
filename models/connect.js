@@ -2,14 +2,12 @@ const { Client } = require("pg");
 const books = require("../models/sample-books");
 require("dotenv").config();
 
-
 const client = new Client({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
   password: process.env.DB_PASS,
   port: process.env.DB_PORT,
 });
-
 
 async function connectDB() {
   await client.connect();

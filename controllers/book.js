@@ -1,5 +1,7 @@
 const { getAll, getABook } = require("../models/getBooks");
 const createABook = require("../models/createBook");
+const updateABook = require("../models/updateBooks")
+
 async function getAllBooks(req, res) {
   try {
     const books = await getAll();
@@ -39,9 +41,18 @@ async function getBook(req, res) {
   }
 }
 
-function updateBook(req, res) {
-  const { id } = req.params;
-  res.status(200).send(req.body);
+async function updateBook(req, res) {
+  try {
+    const err = await updateABook(req.body);
+    if (err) {
+      res.status(400).send("Provide (valid) book data!");
+      return;
+    }
+    res.status(201).end();
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Something went wrong! Try again.");
+  }
 }
 
 function deleteBook(req, res) {
