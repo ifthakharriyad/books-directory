@@ -1,0 +1,21 @@
+meta {
+  name: Login
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{rootUrl}}/user/login
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzA0OTA0MjUzLCJleHAiOjE3OTEzMDQyNTN9.P78ZfdRN6vnHT1gJ
+}
+
+body:form-urlencoded {
+  username: test
+  password: 9876
+  email: 
+}

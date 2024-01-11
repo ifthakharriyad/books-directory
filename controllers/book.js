@@ -1,7 +1,7 @@
 const { getAll, getABook } = require("../models/getBooks");
 const createABook = require("../models/createBook");
-const updateABook = require("../models/updateBooks")
-const deleteAbook = require("../models/deleteBooks")
+const updateABook = require("../models/updateBooks");
+const deleteAbook = require("../models/deleteBooks");
 
 async function getAllBooks(req, res) {
   try {
@@ -58,7 +58,7 @@ async function updateBook(req, res) {
 
 async function deleteBook(req, res) {
   const { id } = req.params;
-    try {
+  try {
     const err = await deleteAbook(id);
     if (err) {
       res.status(400).send(err);

@@ -1,0 +1,22 @@
+meta {
+  name: Create an user
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{rootUrl}}/user/signup
+  body: formUrlEncoded
+  auth: basic
+}
+
+auth:basic {
+  username: riyad
+  password: gooogle
+}
+
+body:form-urlencoded {
+  username: test
+  email: test%40gmail.com
+  password: 9876
+}

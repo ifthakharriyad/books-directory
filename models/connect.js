@@ -30,6 +30,14 @@ async function prepareDB() {
     language VARCHAR(10),
     createdat DATE DEFAULT NOW()
   )`);
+  await client.query("DROP TABLE IF EXISTS users");
+  await client.query(`CREATE TABLE users (
+    id INT GENERATED ALWAYS AS IDENTITY NOT NULL PRIMARY KEY,
+    username VARCHAR(20) NOT NULL,
+    email VARCHAR(20) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    createdat DATE DEFAULT NOW()
+  )`);
   // Creating books table if not exists.
   // await client.query(`SELECT 'CREATE TABLE books (
   //   id INT GENERATED ALWAYS AS IDENTITY NOT NULL PRIMARY KEY,
