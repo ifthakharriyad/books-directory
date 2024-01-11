@@ -1,6 +1,42 @@
 const express = require("express");
 const { client } = require("../models/connect");
+const { getAUser } = require("../models/getUser");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
+async function verifyToken(req, res, next) {
+  if (
+    req.headers &&
+    req.headers.authorization &&
+    req.headers.authorization.split(" ")[0] === "Bearer"
+  ) {
+    try {
+      const token = req.headers.authorization && req.headers.authorization.split(" ")[1] && req.headers.authorization.split(" ")[1].split("=")[1]
+      const decode = await jwt.verify(
+        token,
+        process.env.SECRET,
+      );
+      if (!decode.id) {
+        res.status(401).send({ message: "User not found!" });
+        return;
+      }
+      let user = await getAUser(decode.id);
+      if (!user) {
+        res.status(401).send({ message: "User not found!" });
+        return;
+      }
+      req.user = user;
+      next();
+    } catch (err) {
+      console.error(err);
+      res.status(500).send({ message: "Something went wrong!" });
+      return;
+    }
+  } else {
+    req.user = undefined;
+    res.status(401).send({ message: "Not authorized!" });
+  }
+}
 async function checkDupUser(req, res, next) {
   const { username, email } = req.body;
   if (!username || !email) {
@@ -32,4 +68,4 @@ async function checkDupUser(req, res, next) {
   }
 }
 
-module.exports = { checkDupUser };
+module.exports = { checkDupUser, verifyToken };

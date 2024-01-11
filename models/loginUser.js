@@ -16,7 +16,7 @@ async function loginAUser(res, username, email, password) {
       let token = jwt.sign({ id }, process.env.SECRET, {
         expiresIn: 1 * 24 * 60 * 60 * 1000,
       });
-      res.cookie("jwt", token, { maxAge: 1 * 24 * 60 * 60, httpOnly: true });
+      res.cookie("jwt", token, { maxAge: 1 * 24 * 60 * 60 });
       return;
     }
     return new Error("Authentication Failed");

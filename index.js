@@ -3,7 +3,7 @@ const cookieParser = require("cookie-parser");
 const bookRouter = require("./routes/book");
 const userRouter = require("./routes/user");
 const { connectDB, prepareDB } = require("./models/connect");
-const { checkDupUser } = require("./middlewares/userAuth");
+const { checkDupUser, verifyToken } = require("./middlewares/userAuth");
 require("dotenv").config();
 const app = express();
 const port = 3000;
@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.get("/api/v1/hello", (req, res) => {
   res.send("Hello World!");
 });
-app.use("/api/v1/book", bookRouter);
+app.use("/api/v1/book", verifyToken, bookRouter);
 app.use("/api/v1/user", userRouter);
 
 (async () => {

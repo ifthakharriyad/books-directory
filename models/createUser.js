@@ -24,7 +24,7 @@ async function createAUser(res, user) {
       expiresIn: 1 * 24 * 60 * 60 * 1000,
     });
 
-    res.cookie("jwt", token, { maxAge: 1 * 24 * 60 * 60, httpOnly: true });
+    res.cookie("jwt", token, { maxAge: 1 * 24 * 60 * 60 });
     return;
   }
 }

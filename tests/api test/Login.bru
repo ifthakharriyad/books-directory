@@ -7,15 +7,14 @@ meta {
 post {
   url: {{rootUrl}}/user/login
   body: formUrlEncoded
-  auth: bearer
+  auth: none
 }
 
 auth:bearer {
-  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzA0OTA0MjUzLCJleHAiOjE3OTEzMDQyNTN9.P78ZfdRN6vnHT1gJ
+  token: jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzA0OTUzNDYyLCJleHAiOjE3OTEzNTM0NjJ9.Wge8wF4gHbl4ybdTf7-OIB31Yxg41EvFm0-_yQEgquk
 }
 
 body:form-urlencoded {
   username: test
   password: 9876
-  email: 
 }
