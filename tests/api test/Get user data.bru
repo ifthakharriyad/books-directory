@@ -1,0 +1,15 @@
+meta {
+  name: Get user data
+  type: http
+  seq: 9
+}
+
+get {
+  url: {{rootUrl}}/user/me
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzA1MzM4MDc1LCJleHAiOjE3OTE3MzgwNzV9.6BvnwKmEEgG3mUYqJT1pBhKomqtVAJOCYyY9bHdMbLw
+}

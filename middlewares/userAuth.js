@@ -1,4 +1,3 @@
-const express = require("express");
 const { client } = require("../models/connect");
 const { getAUser } = require("../models/getUser");
 const jwt = require("jsonwebtoken");
@@ -11,11 +10,11 @@ async function verifyToken(req, res, next) {
     req.headers.authorization.split(" ")[0] === "Bearer"
   ) {
     try {
-      const token = req.headers.authorization && req.headers.authorization.split(" ")[1] && req.headers.authorization.split(" ")[1].split("=")[1]
-      const decode = await jwt.verify(
-        token,
-        process.env.SECRET,
-      );
+      const token =
+        req.headers.authorization &&
+        req.headers.authorization.split(" ")[1] &&
+        req.headers.authorization.split(" ")[1].split("=")[1];
+      const decode = await jwt.verify(token, process.env.SECRET);
       if (!decode.id) {
         res.status(401).send({ message: "User not found!" });
         return;

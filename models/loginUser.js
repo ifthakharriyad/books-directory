@@ -4,8 +4,8 @@ const jwt = require("jsonwebtoken");
 
 async function loginAUser(res, username, email, password) {
   let queryConfig = {
-    text: "SELECT * FROM users",
-    values: [],
+    text: "SELECT * FROM users WHERE username=$1 OR email=$2",
+    values: [username,email]
   };
   const { rows } = await client.query(queryConfig);
   if (rows.length == 1) {

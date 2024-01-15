@@ -1,12 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { checkDupUser } = require("../middlewares/userAuth");
+const { checkDupUser, verifyToken } = require("../middlewares/userAuth");
 const {
   createUser,
   loginUser,
   getUser,
-  updateUser,
-  deleteUser,
 } = require("../controllers/user");
 
 // API endpoints
@@ -16,7 +14,7 @@ router.route("/signup").post(checkDupUser, createUser);
 //POST /api/v1/user/login`: Login an user.
 router.route("/login").post(loginUser);
 
-//GET /api/v1/user/{id}`: Requests, Updates, and Removes the user with specific _id_.
-//router.route("/:id").get(getUser).put(updateUser).delete(deleteUser);
+//GET /api/v1/user/me`: Requests the user with specific _id_.
+router.route("/me").get(verifyToken, getUser);
 
 module.exports = router;
